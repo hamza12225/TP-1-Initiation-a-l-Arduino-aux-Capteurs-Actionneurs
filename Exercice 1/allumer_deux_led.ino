@@ -1,6 +1,6 @@
 /**
  * @file led_control.ino
- * @brief Programme pour controller 2 leds avec des periodes saisies par l'utilisateur
+ * @brief Programme pour contrôler 2 LEDs avec des périodes saisies par l'utilisateur
  */
 
 int led1 = 8;
@@ -12,26 +12,35 @@ unsigned long dernierTemps2 = 0;
 bool stateLed1 = LOW;
 bool stateLed2 = LOW;
 
+#define MAX_PERIODE 4294967295UL  // valeur max pour unsigned long
+
 // FSM States
 enum Etat { ATTENTE, LECTURE, CLIGNOTEMENT };
 Etat etat = ATTENTE;
 
 /**
- * @brief Lis les periodes
+ * @brief Lire les périodes depuis le port série et vérifie leur validité
  */
 void lirePeriodes() {
   if (Serial.available() > 0) {
-    periode1 = Serial.parseInt();
-    periode2 = Serial.parseInt();
+    long p1 = Serial.parseInt(); // parseInt retourne long
+    long p2 = Serial.parseInt();
+
+    // vider le buffer
     while (Serial.available() > 0) Serial.read();
 
-    if (periode1 <= 0 || periode2 <= 0) {
-      Serial.println("Erreur: valeurs invalides");
+    // vérifier que les valeurs sont valides
+    if (p1 <= 0 || p2 <= 0 || p1 > MAX_PERIODE || p2 > MAX_PERIODE) {
+      Serial.println("Erreur: valeurs invalides ou trop grandes");
       periode1 = 1000;
       periode2 = 1000;
       etat = ATTENTE;
       return;
     }
+
+    // assigner en toute sécurité aux unsigned long
+    periode1 = (unsigned long)p1;
+    periode2 = (unsigned long)p2;
 
     Serial.print("P1 = ");
     Serial.print(periode1);
@@ -44,7 +53,7 @@ void lirePeriodes() {
 }
 
 /**
- * @brief Metre a jour l'etat d'une LED selon sa periode
+ * @brief Mettre à jour l'état d'une LED selon sa période
  */
 void updateLed(int pin, unsigned long &dernierTemps, unsigned long periode, bool &state) {
   if (millis() - dernierTemps >= periode) {
@@ -57,8 +66,10 @@ void updateLed(int pin, unsigned long &dernierTemps, unsigned long periode, bool
 void setup() {
   pinMode(led1, OUTPUT);
   pinMode(led2, OUTPUT);
+  digitalWrite(led1, LOW);
+  digitalWrite(led2, LOW);
   Serial.begin(9600);
-
+  Serial.println("Entrez P1 et P2 (ms) separes par un espace:");
 }
 
 void loop() {
