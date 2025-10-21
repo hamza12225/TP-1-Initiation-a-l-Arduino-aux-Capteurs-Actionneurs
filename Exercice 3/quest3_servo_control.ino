@@ -1,21 +1,20 @@
 /**
  * @file ServoControl.ino
  * @brief Controle d’un servo 
- * 
- * L’utilisateur tape un chiffre de 1 a 7 pour faire tourner le servo 
+* L’utilisateur tape un chiffre de 1 a 7 pour faire tourner le servo 
  */
 
-#include <Servo.h>  ///< Librairie Arduino pour controler les servos
+#include <Servo.h>  ///Librairie Arduino pour controler servos
 
 // -----------------------------------------------------------------------------
 // Constantes
 // -----------------------------------------------------------------------------
-#define SERVO_PIN  9   ///< Broche du servo (SER1 sur le shield)
+#define SERVO_PIN  9   ///Broche du servo (SER1 sur le shield)
 
 // -----------------------------------------------------------------------------
 // Objet global
 // -----------------------------------------------------------------------------
-Servo servoMoteur;   ///< Objet servo global pour controler le SG90
+Servo servoMoteur;   ///Objet servo global pour controler le SG90
 
 // -----------------------------------------------------------------------------
 // Initialisation
@@ -42,9 +41,9 @@ void loop() {
   if (Serial.available() > 0) {
     char cmd = Serial.read();  // Lire un seul caractere
     
-    // Ignore les retours chariots envoyes par "Entrer" (\r ou \n)
+    // Ignore les retours chariots
     if (cmd == '\r' || cmd == '\n') return;
-
+    
     // Selection de la position selon la commande
     switch (cmd) {
       case '1': servoMoteur.write(0);   Serial.println("0 degres"); break;
