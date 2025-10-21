@@ -1,10 +1,9 @@
 /**
- * @file FanControlPWM.ino
+ * @file MinVentilateur.ino
  * @brief Programme pour controler la vitesse d un mini ventilo avec le PWM 
- *        en utilisant le Adafruit Motor Shield.
  */
 
-#include <AFMotor.h>   // librairie pour controler le moteur DC
+#include <AFMotor.h>   
 
 AF_DCMotor moteurVentilo(1);  // moteur branché sur le port M1 du shield
 
