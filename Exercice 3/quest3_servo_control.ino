@@ -39,13 +39,12 @@ void setup() {
  */
 void loop() {
   if (Serial.available() > 0) {
-    char cmd = Serial.read();  // Lire un seul caractere
-    
+    char commande = Serial.read();  
     // Ignore les retours chariots
-    if (cmd == '\r' || cmd == '\n') return;
-    
+    if (commande == '\r' || cmd == '\n') return;
+
     // Selection de la position selon la commande
-    switch (cmd) {
+    switch (commande) {
       case '1': servoMoteur.write(0);   Serial.println("0 degres"); break;
       case '2': servoMoteur.write(30);  Serial.println("30 degres"); break;
       case '3': servoMoteur.write(60);  Serial.println("60 degres"); break;
