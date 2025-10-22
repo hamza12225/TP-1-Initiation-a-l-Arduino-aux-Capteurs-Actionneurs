@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "Arduino Exercises", "index.html", [
+  [ "Arduino TP", "index.html", [
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [

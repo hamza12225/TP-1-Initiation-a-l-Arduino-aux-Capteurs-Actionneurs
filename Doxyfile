@@ -1,6 +1,6 @@
 # Minimal Doxyfile for Arduino projects in exercice*/ folders
 
-PROJECT_NAME           = "Arduino Exercises"
+PROJECT_NAME           = "Arduino TP"
 OUTPUT_DIRECTORY       = docs
 CREATE_SUBDIRS         = YES
 
@@ -29,9 +29,6 @@ PREDEFINED             = F_CPU=16000000UL
 GENERATE_HTML          = YES
 GENERATE_LATEX         = NO
 
-# Diagrams (optional)
-HAVE_DOT               = YES
-DOT_PATH               = /usr/bin/dot
 
 # Verbose / warnings (useful for debugging)
 QUIET                  = NO
