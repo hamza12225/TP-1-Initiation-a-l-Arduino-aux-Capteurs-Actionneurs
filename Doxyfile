@@ -1,0 +1,44 @@
+# Minimal Doxyfile for Arduino projects in exercice*/ folders
+
+PROJECT_NAME           = "Arduino Exercises"
+OUTPUT_DIRECTORY       = docs
+CREATE_SUBDIRS         = YES
+
+# Input and files
+INPUT                  = .
+RECURSIVE              = YES
+FILE_PATTERNS          = *.ino *.c *.cpp *.h
+EXCLUDE_PATTERNS       = */.git/*
+
+# Treat .ino as C++
+EXTENSION_MAPPING      = ino=C++
+
+# Extraction options
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
+
+# Preprocessing (helpful for Arduino macros)
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = NO
+PREDEFINED             = F_CPU=16000000UL
+
+# Output formats
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+
+# Diagrams (optional)
+HAVE_DOT               = YES
+DOT_PATH               = /usr/bin/dot
+
+# Verbose / warnings (useful for debugging)
+QUIET                  = NO
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = YES
+WARN_LOGFILE           = doxygen_warnings.log
+
+# Misc
+OPTIMIZE_OUTPUT_JAVA   = NO
+
